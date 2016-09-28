@@ -57,7 +57,7 @@ public class ProxyInfo {
         StringBuilder builder=new StringBuilder();
         builder.append("package "+mPackageName).append(":\n\n");
         builder.append("import com.dhao.ioc_api.*;\n");
-        builder.append("public class ").append(mProxyClassName).append(" implements "+SUFFIX+"<"+
+        builder.append("public class ").append(mProxyClassName).append(" implements ViewInject"+"<"+
                 typeElement.getQualifiedName().toString()+">");
         builder.append("\n{\n");
         generateMethod(builder);
