@@ -4,6 +4,7 @@ import com.google.auto.service.AutoService;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
@@ -41,9 +43,10 @@ public class IocPrecessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        Set<String> annotationTypes=new LinkedHashSet<String>();
-        annotationTypes.add(BindView.class.getCanonicalName());
-        return annotationTypes;
+//        Set<String> annotationTypes=new LinkedHashSet<String>();
+//        annotationTypes.add(BindView.class.getCanonicalName());
+//        return annotationTypes;
+        return Collections.singleton(BindView.class.getCanonicalName());
     }
 
     @Override
@@ -58,7 +61,9 @@ public class IocPrecessor extends AbstractProcessor {
        Set<? extends Element> elements=roundEnv.getElementsAnnotatedWith(BindView.class);
 
         for (Element element:elements){
-
+            if (element.getKind()!= ElementKind.FIELD){
+                return false;
+            }
             VariableElement variableElement= (VariableElement) element;
             TypeElement typeElement= (TypeElement) variableElement.getEnclosingElement();
             String qualifiedName=typeElement.getQualifiedName().toString();

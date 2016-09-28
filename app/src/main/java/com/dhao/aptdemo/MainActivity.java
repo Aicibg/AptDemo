@@ -8,6 +8,7 @@ import com.dhao.ioc_api.Ioc;
 import com.example.BindView;
 
 public class MainActivity extends AppCompatActivity {
+
     @BindView(R.id.tv_ioc)
     TextView tvIoc;
 
@@ -16,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Ioc.inject(this);
-//        tvIoc.setText("行不行啊？");
+        tvIoc.setText("行不行啊？");
     }
 }

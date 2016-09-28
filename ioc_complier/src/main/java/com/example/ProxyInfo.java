@@ -19,7 +19,7 @@ public class ProxyInfo {
     public Map<Integer,VariableElement> mInjectElement;
     private String mPackageName;
     private String mProxyClassName;
-    private  String SUFFIX="ViewInjector";
+    private  String SUFFIX="ViewInject";
 
     public ProxyInfo(Elements elements, TypeElement typeElement) {
         this.elements = elements;
@@ -55,8 +55,8 @@ public class ProxyInfo {
 
     public String generateJavaCode() {
         StringBuilder builder=new StringBuilder();
-        builder.append("package "+mPackageName).append(":\n\n");
-        builder.append("import com.dhao.ioc_api.*;\n");
+        builder.append("package "+mPackageName).append(";\n\n");
+        builder.append("import com.dhao.ioc_api.ViewInject;\n");
         builder.append("public class ").append(mProxyClassName).append(" implements ViewInject"+"<"+
                 typeElement.getQualifiedName().toString()+">");
         builder.append("\n{\n");
@@ -65,8 +65,8 @@ public class ProxyInfo {
     }
 
     private void generateMethod(StringBuilder builder) {
-        builder.append("   @Override");
-        builder.append("public void inject("+typeElement.getQualifiedName().toString()+" host,Object object");
+        builder.append("   @Override").append("\n");
+        builder.append("public void inject("+typeElement.getQualifiedName().toString()+" host,Object object)");
         builder.append("\n{\n");
         for (int id:mInjectElement.keySet()){
             VariableElement variableElement=mInjectElement.get(id);

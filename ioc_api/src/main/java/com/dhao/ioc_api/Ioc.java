@@ -14,7 +14,7 @@ public class Ioc {
 
     public static void inject(Object host, Object root) {
         Class<?> clazz = host.getClass();
-        String proxyFullName = clazz.getName() + "$$ViewInjector";
+        String proxyFullName = clazz.getName() + "$$ViewInject";
         try {
             Class<?> proxyClazz=Class.forName(proxyFullName);
             ViewInject viewInject= (ViewInject) proxyClazz.newInstance();
