@@ -1,6 +1,8 @@
 package com.example;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -87,6 +89,11 @@ public class IocPrecessor extends AbstractProcessor {
                 writer.write(proxyInfo.generateJavaCode());
                 writer.flush();
                 writer.close();
+
+//                TypeSpec generateClass=proxyInfo.generateJavaCodePoet();
+//                JavaFile javaFile=JavaFile.builder(proxyInfo.getProxyClassFullNae(),generateClass)
+//                         .build();
+//                javaFile.writeTo(mFilerUtils);
             } catch (IOException e) {
                 e.printStackTrace();
             }
